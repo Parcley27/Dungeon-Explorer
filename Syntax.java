@@ -51,6 +51,40 @@ public class Syntax {
         }
 
         System.out.println(message);
+        
+        // Loops
 
+        // For loop
+        for (int i = 0; i < 5; i += 1) {
+            System.out.println("If iteration number: " + i);
+
+        }
+
+        // Array looping
+        String[] cars = {"Jeep", "Land Rover", "Volvo", "Mercedes"};
+        
+        for (int i = 0; i < cars.length; i++) {
+            System.out.println("i = " + i + " for " + cars[i]);
+
+        }
+
+        // While loop
+        int count = 0;
+        
+        while (count < 5) {
+            System.out.println("While count number: " + count);
+            count++;
+
+        }
+
+        // Do While loop (runs at least once)
+        int num = 1000;
+
+        do {
+            System.out.println("Do number: " + num);
+            num++;
+
+        } while (num < 3);
+        
     }
 }
