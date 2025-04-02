@@ -1,5 +1,7 @@
+import java.util.Scanner; // Scans console data using Scanner class
+
 public class Syntax {
-    
+
     public static void main(String[] args) {
         // Primitive types
         int age = 17;
@@ -85,6 +87,19 @@ public class Syntax {
             num++;
 
         } while (num < 3);
-        
+
+        // Scanner
+        Scanner scanner = new Scanner(System.in); // Create scanner object
+
+        System.out.print("Enter your name: ");
+        String userName = scanner.nextLine(); // Read string input
+
+        System.out.print("Enter your age: ");
+        int userAge = scanner.nextInt();
+
+        System.out.println("Hello " + userName + ", you are " + userAge + " years old.");
+
+        scanner.close(); // Close scanner to prevent memory leaks
+
     }
 }
