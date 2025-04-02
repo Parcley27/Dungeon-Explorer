@@ -35,6 +35,22 @@ public class Syntax {
         System.out.println(isRed || isBlue); // True (or)
         System.out.println(!isRed); // False (is NOT red)
 
+        // Conditionals
+        int temperature = 18;
+        String message = "";
+        
+        if (temperature > 25) {
+            message = "It's hot outside!";
+
+        } else if (temperature > 15) {
+            message = "It's a nice day.";
+
+        } else {
+            message = "It's cold out.";
+
+        }
+
+        System.out.println(message);
 
     }
 }
