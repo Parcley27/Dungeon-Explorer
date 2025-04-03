@@ -23,6 +23,22 @@ public class Player {
         System.out.println("Monster: " + name);
         System.out.println("Health: " + health);
         System.out.println("Attack Power: " + attackPower);
+
+    }
+
+    public String getName() {
+        return name;
+        
+    }
+
+    public int getHealth() {
+        return health;
+
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+
     }
     
 }
