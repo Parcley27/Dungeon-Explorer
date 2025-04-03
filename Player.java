@@ -10,17 +10,13 @@ public class Player {
 
     }
 
-    public void takeDamage(int damage) {
-        health -= damage;
-
-        if (health < 0) health = 0;
-
-        System.out.println(name + " takes " + damage + "damage. Health: " + health);
+    public void updateName(String updatedName) {
+        name = updatedName;
 
     }
 
     public void printStats() {
-        System.out.println("Monster: " + name);
+        System.out.println("Name: " + name);
         System.out.println("Health: " + health);
         System.out.println("Attack Power: " + attackPower);
 
@@ -28,7 +24,7 @@ public class Player {
 
     public String getName() {
         return name;
-        
+
     }
 
     public int getHealth() {
@@ -38,6 +34,15 @@ public class Player {
 
     public int getAttackPower() {
         return attackPower;
+
+    }
+
+    public void takeDamage(int damage) {
+        health -= damage;
+
+        if (health < 0) health = 0;
+
+        System.out.println(name + " takes " + damage + "damage. Health: " + health);
 
     }
     
