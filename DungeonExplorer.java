@@ -4,6 +4,8 @@ public class DungeonExplorer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
+
+        Player player = new Player("Player1");
         
         System.out.println("Welcome to Dungeon Explorer!");
         System.out.println("Type 'help' to see available commands.");
@@ -30,12 +32,17 @@ public class DungeonExplorer {
                     break;
 
                 case "quit":
-                    System.out.println("Thank you for playing, goodbye!");
+                    System.out.println("Thank you for playing."); 
+                    System.out.println("Goodbye!");
+
                     isRunning = false;
 
                     break;
             }
         }
+
+        scanner.close();
+
     }
 
     public static void printHelp() {
@@ -46,4 +53,5 @@ public class DungeonExplorer {
         System.out.println("- quit     : End the game");
 
     }
+    
 }
