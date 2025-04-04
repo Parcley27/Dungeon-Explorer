@@ -37,12 +37,12 @@ public class Player {
 
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage, String monsterName) {
         health -= damage;
 
         if (health < 0) health = 0;
 
-        System.out.println(name + " takes " + damage + "damage. Health: " + health);
+        System.out.println("You take " + damage + " damage from the " + monsterName + ", dropping you to " + health + " health.");
 
     }
     

@@ -37,7 +37,7 @@ public class Monster {
 
         if (health < 0) health = 0;
 
-        System.out.println(name + " takes " + damage + "damage. Health: " + health);
+        System.out.println("The " + name + " takes " + damage + " damage, dropping it to " + health + " health.");
 
     }
 }

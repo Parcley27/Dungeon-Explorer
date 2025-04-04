@@ -9,9 +9,9 @@ public class DungeonExplorer {
 
         Room[] dungeon = {
             new Room("Enterance", "Your starting location.", true, null),
-            new Room("Cave", "A dark cave with dripping water.", false, new Monster("Goblin", 30, 5)),
+            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5)),
             new Room("Corridor", "An errie, torch lit corridor.", false, null),
-            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("Skeleton", 25, 12))
+            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12))
 
         };
 
@@ -34,11 +34,35 @@ public class DungeonExplorer {
 
             switch (command) {
                 case "attack":
-                    System.out.println("Run attack function");
+                    Room currentRoom = dungeon[currentRoomIndex];
+                    Monster monster = currentRoom.getMoster();
+
+                    if (monster != null) {
+                        monster.takeDamage(player.getAttackPower());
+
+                        if (monster.getHealth() == 0) {
+                            System.out.println("You have defeated the " + monster.getName() + "!");
+                            currentRoom.clearMonster();
+                
+                        } else {
+                            System.out.println("\nThe " + monster.getName() + " hits you back!");
+                            player.takeDamage(monster.getAttackPower(), monster.getName());
+
+                            if (player.getHealth() == 0) {
+                                System.out.println("You died to the " + monster.getName() + "!");
+                                System.out.println("** GAME OVER **");
+                    
+                            }
+                        }
+
+                    } else {
+                        System.out.println("There's nothing here to attack!");
+
+                    }
 
                     break;
                 
-                case "explore":
+                case "move":
                     System.out.print("Direction > ");
 
                     String direction = scanner.nextLine().toLowerCase();
@@ -109,13 +133,13 @@ public class DungeonExplorer {
 
     public static void printHelp() {
         System.out.println("Available Commands: ");
-        System.out.println("- attack     : Attack an enemy if present");
-        System.out.println("- explore    : Move into a new room");
-        System.out.println("- - east     : Move east one room");
-        System.out.println("- - west     : Move west one room");
-        System.out.println("- help       : Show command help menu");
-        System.out.println("- stats      : Display player stats");
-        System.out.println("- quit       : End the game");
+        System.out.println("- attack    : Attack an enemy if present");
+        System.out.println("- move      : Move into a new room");
+        System.out.println("- - east    : Move east one room");
+        System.out.println("- - west    : Move west one room");
+        System.out.println("- help      : Show command help menu");
+        System.out.println("- stats     : Display player stats");
+        System.out.println("- quit      : End the game");
 
     }
     
