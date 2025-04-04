@@ -1,12 +1,14 @@
 public class Room {
     private String name;
     private String description;
+    private boolean isFound;
     private Monster monster;
 
     // Constructor
-    public Room(String name, String description, Monster monster) {
+    public Room(String name, String description, boolean isFound, Monster monster) {
         this.name = name;
         this.description = description;
+        this.isFound = isFound;
         this.monster = monster;
 
     }
@@ -31,6 +33,11 @@ public class Room {
 
     public String getDescription() {
         return description;
+
+    }
+
+    public boolean getIsFoundState() {
+        return isFound;
 
     }
 
