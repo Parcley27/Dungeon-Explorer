@@ -31,7 +31,7 @@ public class Room {
 
     public String getDescription() {
         return description;
-        
+
     }
 
     public Monster getMoster() {
@@ -39,7 +39,7 @@ public class Room {
 
     }
 
-    public void clearMoster() {
+    public void clearMonster() {
         monster = null;
 
     }
