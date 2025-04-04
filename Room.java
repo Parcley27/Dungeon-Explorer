@@ -17,7 +17,7 @@ public class Room {
         System.out.println(name + ": " + description);
 
         if (monster != null) {
-            System.out.println("A " + monster.getName() + " with " + monster.getHealth() + " is here!");
+            System.out.println("A " + monster.getName() + " with " + monster.getHealth() + " health is here!");
 
 
         } else {

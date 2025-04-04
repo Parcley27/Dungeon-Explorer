@@ -3,19 +3,29 @@ import java.util.Scanner;
 public class DungeonExplorer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Player player = new Player("Player1");
+
         boolean isRunning = true;
 
-        Player player = new Player("Player1");
+        Room[] dungeon = {
+            new Room("Enterance", "Your starting location.", true, null),
+            new Room("Cave", "A dark cave with dripping water.", false, new Monster("Goblin", 30, 5)),
+            new Room("Corridor", "An errie, torch lit corridor.", false, null),
+            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("Skeleton", 25, 12))
+
+        };
+
+        int currentRoomIndex = 0;
         
         System.out.println("\nWelcome to Dungeon Explorer!");
-        System.out.println("Type 'help' to see available commands.");
 
         System.out.print("\nPlease enter your player's name to begin: ");
-        String name = scanner.nextLine();
+        String playerName = scanner.nextLine();
 
-        player.updateName(name);
+        player.updateName(playerName);
 
-        System.out.println("Welcome, " + player.getName() + "!");
+        System.out.println("Welcome, " + player.getName() + "! Your adventure begins...");
+        System.out.println("\nType 'help' to see available commands.");
 
         while (isRunning) {
             System.out.print("\n> ");
@@ -29,7 +39,43 @@ public class DungeonExplorer {
                     break;
                 
                 case "explore":
-                    System.out.println("Run explore function");
+                    System.out.print("Direction > ");
+
+                    String direction = scanner.nextLine().toLowerCase();
+                    
+                    switch (direction) {                        
+                        case "east":
+                            if (currentRoomIndex < (dungeon.length - 1)) {
+                                currentRoomIndex++;
+
+                                System.out.println("You move east one room...");
+                                dungeon[currentRoomIndex].printRoomDetails();
+
+                            } else {
+                                System.out.println("You've reached this end, there's nowhere else to go east!");
+
+                            }
+
+                            break;
+                        
+                        case "west":
+                            if (currentRoomIndex > 0) {
+                                currentRoomIndex--;
+
+                                System.out.println("You move west one room...");
+                                dungeon[currentRoomIndex].printRoomDetails();
+
+                            } else {
+                                System.out.println("You've reached this end, there's nowhere else to go west!");
+
+                            }
+
+                            break;
+                        
+                        default:
+                            System.out.println("Unknown command. Type 'help' for a list of commands.");
+
+                    } 
 
                     break;
                 
@@ -50,6 +96,9 @@ public class DungeonExplorer {
                     isRunning = false;
 
                     break;
+                
+                default:
+                    System.out.println("Unknown command. Type 'help' for a list of commands.");
 
             }
         }
@@ -60,11 +109,13 @@ public class DungeonExplorer {
 
     public static void printHelp() {
         System.out.println("Available Commands: ");
-        System.out.println("- attack   : Attack an enemy if present");
-        System.out.println("- explore  : Move into a new room");
-        System.out.println("- help     : Show command help menu");
-        System.out.println("- stats    : Display player stats");
-        System.out.println("- quit     : End the game");
+        System.out.println("- attack     : Attack an enemy if present");
+        System.out.println("- explore    : Move into a new room");
+        System.out.println("- - east     : Move east one room");
+        System.out.println("- - west     : Move west one room");
+        System.out.println("- help       : Show command help menu");
+        System.out.println("- stats      : Display player stats");
+        System.out.println("- quit       : End the game");
 
     }
     
