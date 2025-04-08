@@ -4,7 +4,7 @@ public class TestGame {
 
         Monster goblin = new Monster("Goblin", 30, 5);
 
-        Room cave = new Room("Cave", "A dark cave with dripping water.", true, goblin);
+        Room cave = new Room("Cave", "A dark cave with dripping water.", true, goblin, null);
 
         player.printStats();
         cave.printRoomDetails();

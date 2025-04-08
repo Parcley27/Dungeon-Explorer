@@ -8,10 +8,10 @@ public class DungeonExplorer {
         boolean isRunning = true;
 
         Room[] dungeon = {
-            new Room("Enterance", "Your starting location.", true, null),
-            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5)),
-            new Room("Corridor", "An errie, torch lit corridor.", false, null),
-            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12))
+            new Room("Enterance", "Your starting location.", true, null, null),
+            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5), new Item("Potion", "Restores 20 health")),
+            new Room("Corridor", "An errie, torch lit corridor.", false, null, null),
+            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12), new Item("Blade Shard", "Boosts attack power"))
 
         };
 
@@ -33,6 +33,7 @@ public class DungeonExplorer {
             String command = scanner.nextLine().toLowerCase();
 
             switch (command) {
+                case "a":
                 case "attack":
                     Room currentRoom = dungeon[currentRoomIndex];
                     Monster monster = currentRoom.getMoster();
@@ -62,12 +63,26 @@ public class DungeonExplorer {
 
                     break;
                 
+                case "h":
+                case "help":
+                    printHelp();
+
+                    break;
+                
+                case "i":
+                case "inventory":
+                    player.viewInventory();
+                    
+                    break;
+                
+                case "m":
                 case "move":
                     System.out.print("Direction > ");
 
                     String direction = scanner.nextLine().toLowerCase();
                     
-                    switch (direction) {                        
+                    switch (direction) { 
+                        case "e":                       
                         case "east":
                             if (currentRoomIndex < (dungeon.length - 1)) {
                                 currentRoomIndex++;
@@ -82,6 +97,7 @@ public class DungeonExplorer {
 
                             break;
                         
+                        case "w":
                         case "west":
                             if (currentRoomIndex > 0) {
                                 currentRoomIndex--;
@@ -103,16 +119,28 @@ public class DungeonExplorer {
 
                     break;
                 
-                case "help":
-                    printHelp();
+                case "p":
+                case "pick up":
+                    currentRoom = dungeon[currentRoomIndex];
+
+                    if (currentRoom.hasItem()) {
+                        Item foundItem = currentRoom.takeItem();
+                        player.addItem(foundItem);
+
+                    } else {
+                        System.out.println("There's nothing to pick up here!");
+
+                    }
 
                     break;
                 
+                case "s":
                 case "stats":
                     player.printStats();
 
                     break;
 
+                case "q":
                 case "quit":
                     System.out.println("Thank you for playing."); 
                     System.out.println("Goodbye, " + player.getName() + "!\n");
@@ -133,13 +161,15 @@ public class DungeonExplorer {
 
     public static void printHelp() {
         System.out.println("Available Commands: ");
-        System.out.println("- attack    : Attack an enemy if present");
-        System.out.println("- move      : Move into a new room");
-        System.out.println("- - east    : Move east one room");
-        System.out.println("- - west    : Move west one room");
-        System.out.println("- help      : Show command help menu");
-        System.out.println("- stats     : Display player stats");
-        System.out.println("- quit      : End the game");
+        System.out.println("- attack    (a) : Attack an enemy if present");
+        System.out.println("- help      (h) : Show command help menu");
+        System.out.println("- inventory (i) : Display player inventory");
+        System.out.println("- move      (m) : Move into a new room");
+        System.out.println("- - east    (e) : Move east one room");
+        System.out.println("- - west    (w) : Move west one room");
+        System.out.println("- pick up   (p) : Picks up any items in the current room");
+        System.out.println("- stats     (s) : Display player stats");
+        System.out.println("- quit      (q) : End the game");
 
     }
     

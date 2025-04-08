@@ -3,13 +3,16 @@ public class Room {
     private String description;
     private boolean isFound;
     private Monster monster;
+    private Item item;
+    
 
     // Constructor
-    public Room(String name, String description, boolean isFound, Monster monster) {
+    public Room(String name, String description, boolean isFound, Monster monster, Item item) {
         this.name = name;
         this.description = description;
         this.isFound = isFound;
         this.monster = monster;
+        this.item = item;
 
     }
 
@@ -24,6 +27,11 @@ public class Room {
             System.out.println("This room is empty of monsters.");
 
         }
+
+        if (item != null) {
+            System.out.println("A " + item.getName() + " is in the room.");
+
+        }
     }
 
     public String getName() {
@@ -33,6 +41,11 @@ public class Room {
 
     public String getDescription() {
         return description;
+
+    }
+
+    public void find() {
+        isFound = true;
 
     }
 
@@ -48,6 +61,24 @@ public class Room {
 
     public void clearMonster() {
         monster = null;
+
+    }
+
+    public boolean hasItem() {
+        if (item != null) {
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    public Item takeItem() {
+        Item foundItem = item;
+        item = null;
+
+        return foundItem;
 
     }
 }
