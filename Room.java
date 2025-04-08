@@ -31,6 +31,9 @@ public class Room {
         if (item != null) {
             System.out.println("A " + item.getName() + " is in the room.");
 
+        } else {
+            System.out.println("No items are in this room.");
+            
         }
     }
 
@@ -44,12 +47,12 @@ public class Room {
 
     }
 
-    public void find() {
+    public void markAsFound() {
         isFound = true;
 
     }
 
-    public boolean getIsFoundState() {
+    public boolean isFound() {
         return isFound;
 
     }

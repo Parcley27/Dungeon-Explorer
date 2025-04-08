@@ -17,6 +17,8 @@ public class Player {
         System.out.println("Name: " + name);
         System.out.println("Health: " + health);
         System.out.println("Attack Power: " + attackPower);
+        
+        viewInventory();
 
     }
 
@@ -63,8 +65,9 @@ public class Player {
             System.out.println("Inventory:");
 
             for (Item item : inventory) {
+                System.out.print("- ");
                 item.printDetails();
-                
+
             }
         }
     }

@@ -75,6 +75,32 @@ public class DungeonExplorer {
                     
                     break;
                 
+                case "mp":
+                case "map":
+                    for (Room room : dungeon) {
+                        if (room.isFound()) {
+                            if (room != dungeon[0]) {
+                                System.out.print(" = ");
+
+                            }
+
+                            System.out.print(room == dungeon[currentRoomIndex] ? "[* " : "[ ");
+
+                            System.out.print(room.getName());
+
+                            System.out.print(room == dungeon[currentRoomIndex] ? " *]" : " ]");
+
+                        } else {
+                            System.out.print(" = [?]");
+                            break;
+
+                        }
+                    }
+
+                    System.out.println();
+
+                    break;
+                
                 case "m":
                 case "move":
                     System.out.print("Direction > ");
@@ -88,6 +114,8 @@ public class DungeonExplorer {
                                 currentRoomIndex++;
 
                                 System.out.println("You move east one room...");
+
+                                dungeon[currentRoomIndex].markAsFound();
                                 dungeon[currentRoomIndex].printRoomDetails();
 
                             } else {
@@ -103,6 +131,8 @@ public class DungeonExplorer {
                                 currentRoomIndex--;
 
                                 System.out.println("You move west one room...");
+
+                                dungeon[currentRoomIndex].markAsFound();
                                 dungeon[currentRoomIndex].printRoomDetails();
 
                             } else {
@@ -134,6 +164,12 @@ public class DungeonExplorer {
 
                     break;
                 
+                case "r":
+                case "room info":
+                    dungeon[currentRoomIndex].printRoomDetails();
+
+                    break;
+                
                 case "s":
                 case "stats":
                     player.printStats();
@@ -161,15 +197,17 @@ public class DungeonExplorer {
 
     public static void printHelp() {
         System.out.println("Available Commands: ");
-        System.out.println("- attack    (a) : Attack an enemy if present");
-        System.out.println("- help      (h) : Show command help menu");
-        System.out.println("- inventory (i) : Display player inventory");
-        System.out.println("- move      (m) : Move into a new room");
-        System.out.println("- - east    (e) : Move east one room");
-        System.out.println("- - west    (w) : Move west one room");
-        System.out.println("- pick up   (p) : Picks up any items in the current room");
-        System.out.println("- stats     (s) : Display player stats");
-        System.out.println("- quit      (q) : End the game");
+        System.out.println("- attack    (a)  : Attack an enemy if present");
+        System.out.println("- help      (h)  : Show command help menu");
+        System.out.println("- inventory (i)  : Display player inventory");
+        System.out.println("- map       (mp) : Display the known dungeon map");
+        System.out.println("- move      (m)  : Move into a new room");
+        System.out.println("- - east    (e)  : Move east one room");
+        System.out.println("- - west    (w)  : Move west one room");
+        System.out.println("- pick up   (p)  : Picks up any items in the current room");
+        System.out.println("- room info (r)  : Display info for the current room");
+        System.out.println("- stats     (s)  : Display player stats");
+        System.out.println("- quit      (q)  : End the game");
 
     }
     
