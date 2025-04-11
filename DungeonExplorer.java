@@ -9,7 +9,7 @@ public class DungeonExplorer {
 
         Room[] dungeon = {
             new Room("Enterance", "Your starting location.", true, null, null),
-            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5), new Item("Potion", "Restores 20 health")),
+            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5), new Item("Heal Potion", "Restores 20 health")),
             new Room("Corridor", "An errie, torch lit corridor.", false, null, null),
             new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12), new Item("Blade Shard", "Boosts attack power"))
 
@@ -164,6 +164,15 @@ public class DungeonExplorer {
 
                     break;
                 
+                case "q":
+                case "quit":
+                    System.out.println("Thank you for playing."); 
+                    System.out.println("Goodbye, " + player.getName() + "!\n");
+
+                    isRunning = false;
+
+                    break;
+                
                 case "r":
                 case "room info":
                     dungeon[currentRoomIndex].printRoomDetails();
@@ -175,13 +184,27 @@ public class DungeonExplorer {
                     player.printStats();
 
                     break;
+                
+                case "u":
+                case "use":
+                    if (player.getInventory().isEmpty()) {
+                        System.out.println("You don't have any items you can use.");
 
-                case "q":
-                case "quit":
-                    System.out.println("Thank you for playing."); 
-                    System.out.println("Goodbye, " + player.getName() + "!\n");
+                    } else {
+                        String[] parts = command.split(" ", 2);
 
-                    isRunning = false;
+                        if (parts.length < 2) {
+                            System.out.print("Use Item > ");
+
+                            String item = scanner.nextLine().toLowerCase();
+
+                            player.useItem(item);
+
+                        } else {
+                            player.useItem(parts[1]);
+
+                        }
+                    }
 
                     break;
                 
@@ -205,9 +228,11 @@ public class DungeonExplorer {
         System.out.println("- - east    (e)  : Move east one room");
         System.out.println("- - west    (w)  : Move west one room");
         System.out.println("- pick up   (p)  : Picks up any items in the current room");
+        System.out.println("- quit      (q)  : End the game");
         System.out.println("- room info (r)  : Display info for the current room");
         System.out.println("- stats     (s)  : Display player stats");
-        System.out.println("- quit      (q)  : End the game");
+        System.out.println("- use       (u)  : Use an item from your inventory");
+        System.out.println("- - [item name]  : Use said item");
 
     }
     

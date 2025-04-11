@@ -17,7 +17,7 @@ public class Player {
         System.out.println("Name: " + name);
         System.out.println("Health: " + health);
         System.out.println("Attack Power: " + attackPower);
-        
+
         viewInventory();
 
     }
@@ -51,10 +51,43 @@ public class Player {
 
     }
 
+    public void heal(int amount) {
+        health = Math.min(health + amount, 100);
+        System.out.println("Your health was increased to " + health + "hp.");
+
+    }
+
     public void addItem(Item item) {
         inventory.add(item);
         System.out.println("You picked up a " + item.getName() + "!");
 
+    }
+
+    public void buff(int hp) {
+        attackPower = attackPower + hp;
+        System.out.println("Your attack power was buffed to " + attackPower + ".");
+
+    }
+
+    public void useItem(String itemName) {
+        for (int i = 0; i < inventory.size(); i++) {
+            Item item = inventory.get(i);
+
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                if (itemName.equalsIgnoreCase("heal potion")) {
+                    heal(20);
+
+                }
+
+                if (item.getName().equalsIgnoreCase("blade shard")) {
+                    buff(5);
+
+                }
+
+                inventory.remove(i);
+
+            }            
+        }
     }
 
     public void viewInventory() {
@@ -71,5 +104,9 @@ public class Player {
             }
         }
     }
-    
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+
+    }
 }
