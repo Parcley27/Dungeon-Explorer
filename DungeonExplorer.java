@@ -9,9 +9,9 @@ public class DungeonExplorer {
 
         Room[] dungeon = {
             new Room("Enterance", "Your starting location.", true, null, null),
-            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5), new Item("Heal Potion", "Restores 20 health")),
+            new Room("Cave", "A dark cave with dripping water.", false, new Monster("goblin", 30, 5), new Item("Heal Potion", "Restores 20 health", false)),
             new Room("Corridor", "An errie, torch lit corridor.", false, null, null),
-            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12), new Item("Blade Shard", "Boosts attack power"))
+            new Room("Carving room", "A room filled with ancient carvings.", false, new Monster("skeleton", 25, 12), new Item("Blade Shard", "Boosts attack power", true))
 
         };
 

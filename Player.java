@@ -1,9 +1,11 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
     private String name;
     private int health, attackPower;
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private Map<String, InventorySlot> inventory = new HashMap<>();
+    private final int maxSlots = 5;
 
     // Constructor to initialize player
     public Player(String name) {
@@ -58,8 +60,38 @@ public class Player {
     }
 
     public void addItem(Item item) {
-        inventory.add(item);
-        System.out.println("You picked up a " + item.getName() + "!");
+        String itemName = item.getName().toLowerCase();
+
+        if (item.isStackable()) {
+            InventorySlot slot = inventory.get(itemName);
+
+            if (slot != null) {
+                slot.add(1);
+
+                System.out.println("Added another " + itemName + ". Total: " + slot.getQuantity());
+
+            } else {
+                if (inventory.size() < maxSlots) {
+                    inventory.put(itemName, new InventorySlot(item, 1));
+
+                    System.out.println("Picked up a " + itemName);
+
+                } else {
+                    System.out.println("Your inventory is full; drop something first.");
+
+                }
+            }
+
+        } else {
+            if (inventory.size() < maxSlots) {
+                inventory.put(itemName, new InventorySlot(item, 1));
+                System.out.println("Picked up a " + itemName);
+
+            } else {
+                System.out.println("Your inventory is full; drop something first.");
+
+            }
+        }
 
     }
 
@@ -70,23 +102,34 @@ public class Player {
     }
 
     public void useItem(String itemName) {
-        for (int i = 0; i < inventory.size(); i++) {
-            Item item = inventory.get(i);
+        String key = itemName.toLowerCase();
 
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                if (itemName.equalsIgnoreCase("heal potion")) {
-                    heal(20);
+        if (!inventory.containsKey(key)) {
+            System.out.println("You do not have that item in your inventory.");
 
-                }
+            return;
 
-                if (item.getName().equalsIgnoreCase("blade shard")) {
-                    buff(5);
+        }
 
-                }
+        InventorySlot slot = inventory.get(key);
+        Item item = slot.getItem();
 
-                inventory.remove(i);
+        if (key.equals("heal potion")) {
+            heal(20);
 
-            }            
+        } else if (key.equals("blade shard")) {
+            buff(5);
+
+        }
+
+        inventory.remove(key);
+
+        if (item.isStackable() && slot.getQuantity() > 1) {
+            slot.remove(1);
+
+        } else {
+            inventory.remove(key);
+
         }
     }
 
@@ -97,15 +140,19 @@ public class Player {
         } else {
             System.out.println("Inventory:");
 
-            for (Item item : inventory) {
+            for (InventorySlot slot : inventory.values()) {
                 System.out.print("- ");
+
+                Item item = slot.getItem();
                 item.printDetails();
+
+                System.out.print("- - Quantity: " + (item.isStackable() ? slot.getQuantity() : "1"));
 
             }
         }
     }
 
-    public ArrayList<Item> getInventory() {
+    public Map<String, InventorySlot> getInventory() {
         return inventory;
 
     }
